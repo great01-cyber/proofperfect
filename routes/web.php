@@ -13,8 +13,8 @@ Route::get('/', function () {
 Route::post('submit', [SubmissionController::class, 'store'])
     ->name('submit');
 
-Route::post('/api/comments', [CommentController::class, 'store']);
-Route::get('/api/comments', [CommentController::class, 'index']);
+Route::get('/comments', [CommentController::class, 'index']);
+Route::post('/comments', [CommentController::class, 'store']);
 
 // ADMIN (login required)
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
