@@ -6,15 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
             $table->string('email');
-            $table->string('document_type');
+            $table->string('document_type')->nullable();
+            $table->text('google_doc_link');
+            $table->text('focus_notes')->nullable();
             $table->enum('status', ['pending', 'in_review', 'completed'])->default('pending');
             $table->text('admin_notes')->nullable();
             $table->timestamp('reviewed_at')->nullable();
@@ -22,9 +21,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('submissions');
