@@ -315,12 +315,12 @@
   <div class="about-inner">
     <div class="about-text">
       <div class="divider" style="margin: 0 0 1.5rem 0;"></div>
-      <h2>I Am <em>Here to Guide,</em></h2>
+      <h2>I Am <em>Here to Guide.</em></h2>
       <div class="mission-box">
         "I created this space because I believe every student deserves access to expert feedback. This is not a paid service. I am motivated to help students through their academic journey, as many of them struggle without proper guidance. This is my way of giving back and supporting students to improve their work, gain confidence, and achieve their academic goals."
       </div>
       <p>My name is Ujah John. I know what it feels like to stare at a blank page, unsure if your writing is good enough or even meets the expectation your tutors has set. I have been a student too. I understand the pressure behind every assessment, the hope packed into a Statement of Purpose, and the anxiety that comes with every job application.</p>
-      <p>I worked as a Data Analyst at the <strong>University of Sheffield(Top 100 university in the world)</strong>, and later completed my <strong>Master's degree at Sheffield Hallam University</strong>. I also have years of experience in writing and academic publication — so I know what markers, admissions panels, and recruiters are actually looking for.</p>
+      <p>I worked as a Data Analyst at the <strong>University of Sheffield (Top 100 university in the world)</strong>, and later completed my <strong>Master's degree at Sheffield Hallam University</strong>. I also have years of experience in writing and academic publication — so I know what markers, admissions panels, and recruiters are actually looking for.</p>
       <p>But most importantly: I am not here to rewrite your work. I am here to help you see it more clearly — to guide you, and give you my professional insight.</p>
       <p>This service is, and always will be, <strong>completely free</strong>.</p>
     </div>
@@ -375,7 +375,7 @@
     <div class="card">
       <div class="card-icon">📄</div>
       <h3>CV / Résumé</h3>
-      <p>Consistency, formatting, and clarity — your CV should make recruiters focus on your achievements,</p>
+      <p>Consistency, formatting, and clarity — your CV should make recruiters focus on your achievements.</p>
     </div>
   </div>
 </section>
@@ -436,7 +436,7 @@
       <div class="conf-point">
         <div class="cp-icon">🗑️</div>
         <h4>You Stay in Control</h4>
-        <p>You own the Google Doc. Revoke my access at any time — with one click. That is why this method was chosen</p>
+        <p>You own the Google Doc. Revoke my access at any time — with one click. That is why this method was chosen.</p>
       </div>
       <div class="conf-point">
         <div class="cp-icon">🆓</div>
@@ -520,18 +520,18 @@
   </div>
 
   <div class="comments-inner">
+    <!-- Comment form — name field removed -->
     <div class="comment-form-wrap">
       <h3>✏️ Leave a Comment</h3>
-      <div class="form-group">
-        <label>Your Name or Alias</label>
-        <input type="text" id="commentName" placeholder="e.g. Amara K. or Anonymous">
-      </div>
       <div class="form-group">
         <label>Your Comment *</label>
         <textarea id="commentText" placeholder="Share your experience, encouragement, or thoughts..." style="min-height: 90px;"></textarea>
       </div>
       <button type="button" class="btn-primary" onclick="postComment()" style="padding: 0.85rem 2rem; font-size: 0.88rem;">Post Comment</button>
     </div>
+
+    <!-- Comments appear here instantly after posting -->
+    <div class="comment-list" id="commentList"></div>
   </div>
 </section>
 
@@ -550,61 +550,64 @@
     });
   }
 
-async function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     const res = await fetch('/submit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json', // ⭐ REQUIRED
-            'X-CSRF-TOKEN': document
-                .querySelector('meta[name="csrf-token"]')
-                .getAttribute('content'),
-        },
-        body: JSON.stringify({
-            email:           document.getElementById('emailInput').value,
-            document_type:   document.querySelector('select').value,
-            google_doc_link: document.querySelector('input[type="url"]').value,
-            focus_notes:     document.querySelector('textarea').value,
-        }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      },
+      body: JSON.stringify({
+        email:           document.getElementById('emailInput').value,
+        document_type:   document.querySelector('select').value,
+        google_doc_link: document.querySelector('input[type="url"]').value,
+        focus_notes:     document.querySelector('textarea').value,
+      }),
     });
 
     if (!res.ok) {
-        const error = await res.text();
-        console.log(error);
-        return;
+      const error = await res.text();
+      console.log(error);
+      return;
     }
 
     const data = await res.json();
 
     if (data.success) {
-        document.getElementById('proofForm').style.display = 'none';
-        document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('proofForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
     }
-}
+  }
 
-   function postComment() {
-  const textEl = document.getElementById('commentText');
-  const text = textEl.value.trim();
-  if (!text) { textEl.focus(); return; }
+  function postComment() {
+    const textEl = document.getElementById('commentText');
+    const text = textEl.value.trim();
+    if (!text) { textEl.focus(); return; }
 
-  const list = document.getElementById('commentList');
+    const list = document.getElementById('commentList');
 
-  const card = document.createElement('div');
-  card.className = 'comment-card';
-  card.innerHTML = `
-    <div class="comment-meta">
-      <div class="comment-avatar">A</div>
-      <span class="comment-name">Anonymous</span>
-      <span class="comment-time">Just now</span>
-    </div>
-    <div class="comment-text">${esc(text)}</div>
-  `;
-  list.insertBefore(card, list.firstChild);
-  textEl.value = '';
-  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const card = document.createElement('div');
+    card.className = 'comment-card';
+    card.innerHTML = `
+      <div class="comment-meta">
+        <div class="comment-avatar">A</div>
+        <span class="comment-name">Anonymous</span>
+        <span class="comment-time">${timeStr}</span>
+      </div>
+      <div class="comment-text">${esc(text)}</div>
+    `;
+
+    // Insert at the top so newest comments appear first
+    list.insertBefore(card, list.firstChild);
+    textEl.value = '';
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   function esc(s) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
