@@ -26,6 +26,7 @@ class NewSubmissionMail extends Mailable
     {
         return new Content(
             view: 'emails.new-submission',
+            with: ['submission' => $this->submission],
         );
     }
 }
