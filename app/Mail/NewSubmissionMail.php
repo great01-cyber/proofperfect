@@ -5,22 +5,27 @@ namespace App\Mail;
 use App\Models\Submission;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class NewSubmissionMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $submission;
+    public function __construct(public Submission $submission) {}
 
-    public function __construct(Submission $submission)
+    public function envelope(): Envelope
     {
-        $this->submission = $submission;
+        return new Envelope(
+            subject: 'New Proofreading Submission — ' . $this->submission->document_type,
+        );
     }
 
-    public function build()
+    public function content(): Content
     {
-        return $this->subject('New Submission Received')
-                    ->markdown('emails.new_submission');
+        return new Content(
+            view: 'emails.new-submission',
+        );
     }
 }
