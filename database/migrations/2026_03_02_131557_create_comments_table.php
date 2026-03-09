@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->text('comment');      // the comment text
-            $table->timestamps();         // created_at, updated_at
+            $table->text('body');
+            $table->timestamps();
         });
     }
 
