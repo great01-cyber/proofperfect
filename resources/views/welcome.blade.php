@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ProofPerfect — Free Student Proofreading by Ujah John</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
   :root {
     --ink: #1a1208;
@@ -294,14 +295,14 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-tag">✦ Completely Free for Students</div>
-  <h1>Your Words,<br><em>Perfected</em> &amp; Polished</h1>
+  <h1>Your Words,<br><em>Improved</em> &amp; Polished</h1>
   <div class="author-banner">
     <p>Free Proofreading &amp; Guidance by</p>
     <div class="author-name">Ujah John</div>
   </div>
   <p class="hero-sub">
     Honest, confidential proofreading for assessments, SOPs, cover letters, and CVs.
-    I am not here to judge — I am here to guide.
+    I am only here to guide.
   </p>
   <div class="hero-cta">
     <a href="#submit" class="btn-primary">Submit Your Document</a>
@@ -314,20 +315,20 @@
   <div class="about-inner">
     <div class="about-text">
       <div class="divider" style="margin: 0 0 1.5rem 0;"></div>
-      <h2>I Am <em>Here to Guide,</em><br>Not to Judge</h2>
+      <h2>I Am <em>Here to Guide.</em></h2>
       <div class="mission-box">
-        "I created this space because I believe every student deserves access to expert feedback — regardless of background, finances, or confidence. This is not a paid service. It is a commitment to students."
+        "I created this space because I believe every student deserves access to expert feedback. This is not a paid service. I am motivated to help students through their academic journey, as many of them struggle without proper guidance. This is my way of giving back and supporting students to improve their work, gain confidence, and achieve their academic goals."
       </div>
-      <p>My name is Ujah John. I know what it feels like to stare at a blank page, unsure if your writing is good enough. I have been a student too. I understand the pressure behind every assessment, the hope packed into a Statement of Purpose, and the anxiety that comes with every job application.</p>
-      <p>I studied and worked as a Data Analyst at the <strong>University of Sheffield</strong>, and later completed my <strong>Master's degree at Sheffield Hallam University</strong>. I also have years of experience in writing and academic publication — so I know what markers, admissions panels, and recruiters are actually looking for.</p>
-      <p>But most importantly: I am not here to rewrite your work. I am here to help you see it more clearly — to guide you, not replace you. Your voice matters. I am simply helping it come through at its best.</p>
+      <p>My name is Ujah John. I know what it feels like to stare at a blank page, unsure if your writing is good enough or even meets the expectation your tutors has set. I have been a student too. I understand the pressure behind every assessment, the hope packed into a Statement of Purpose, and the anxiety that comes with every job application.</p>
+      <p>I worked as a Data Analyst at the <strong>University of Sheffield(Top 100 university in the world)</strong>, and later completed my <strong>Master's degree at Sheffield Hallam University</strong>. I also have years of experience in writing and academic publication — so I know what markers, admissions panels, and recruiters are actually looking for.</p>
+      <p>But most importantly: I am not here to rewrite your work. I am here to help you see it more clearly — to guide you, and give you my professional insight.</p>
       <p>This service is, and always will be, <strong>completely free</strong>.</p>
     </div>
     <div class="credentials">
       <div class="cred-item">
         <div class="cred-icon">📊</div>
         <h4>University of Sheffield</h4>
-        <p>Studied and worked as a Data Analyst at the University of Sheffield — years of experience in academic research, data analysis, and professional writing.</p>
+        <p>Worked as a Data Analyst at the University of Sheffield — years of experience in academic research, data analysis, and professional writing.</p>
       </div>
       <div class="cred-item">
         <div class="cred-icon">🎓</div>
@@ -337,12 +338,12 @@
       <div class="cred-item">
         <div class="cred-icon">✍️</div>
         <h4>Years of Writing &amp; Publication</h4>
-        <p>Extensive experience in writing and academic publication. I know what reviewers look for — and I'll help you meet that bar while keeping your authentic voice.</p>
+        <p>Extensive experience in academic writing.</p>
       </div>
       <div class="cred-item">
         <div class="cred-icon">🤝</div>
         <h4>A Guide, Not a Ghost-Writer</h4>
-        <p>I don't write your work for you. I help you see it more clearly — improving grammar, structure, clarity, and tone while your ideas remain entirely yours.</p>
+        <p>I don't write your work for you. I help you see it more clearly — improving grammar, structure, clarity, and tone.</p>
       </div>
     </div>
   </div>
@@ -369,12 +370,12 @@
     <div class="card">
       <div class="card-icon">✉️</div>
       <h3>Cover Letters</h3>
-      <p>Stand out from hundreds of applicants. Your cover letter should open doors, not close them. I'll make sure every word earns its place.</p>
+      <p>Stand out from hundreds of applicants. Your cover letter should open doors, not close them.</p>
     </div>
     <div class="card">
       <div class="card-icon">📄</div>
       <h3>CV / Résumé</h3>
-      <p>Consistency, formatting, and clarity — your CV should make recruiters focus on your achievements, not trip over your mistakes.</p>
+      <p>Consistency, formatting, and clarity — your CV should make recruiters focus on your achievements,</p>
     </div>
   </div>
 </section>
@@ -407,7 +408,7 @@
     <div class="step">
       <div class="step-num">5</div>
       <h4>Submit with Confidence</h4>
-      <p>Apply the edits, revoke my access, and submit your best work — polished and ready.</p>
+      <p>Apply the edits, revoke my access, and submit your work — polished and ready.</p>
     </div>
   </div>
 </section>
@@ -418,7 +419,7 @@
     <div class="conf-badge">🔒 Transparency &amp; Confidentiality</div>
     <h2>I Know What's at Stake</h2>
     <p>I know sharing an assessment or personal statement can feel risky. You might worry about academic integrity, plagiarism flags, or whether your work might be seen by the wrong people. So let me be completely transparent:</p>
-    <p><strong style="color: #d0ecc0;">I will never share, publish, reproduce, or misuse your document in any form.</strong> I am not a company. I am one person — Ujah John — and my integrity depends entirely on your trust. I review your document, leave comments, and that is where it ends.</p>
+    <p><strong style="color: #d0ecc0;">I will never share, publish, reproduce, or misuse your document in any form.</strong> I review your document, leave comments, and that is where it ends.</p>
     <p>If your institution has strict submission policies, you can share a draft or earlier version. You are always in full control — you can revoke access to your Google Doc at any moment, instantly.</p>
     <p>I do this because I genuinely want to help students. Not for payment, not for credit — just to make a difference where I can.</p>
     <div class="conf-points">
@@ -435,12 +436,12 @@
       <div class="conf-point">
         <div class="cp-icon">🗑️</div>
         <h4>You Stay in Control</h4>
-        <p>You own the Google Doc. Revoke my access at any time — with one click.</p>
+        <p>You own the Google Doc. Revoke my access at any time — with one click. That is why this method was chosen</p>
       </div>
       <div class="conf-point">
         <div class="cp-icon">🆓</div>
         <h4>Always Free</h4>
-        <p>No charges. No upsells. No catches. Done out of genuine care for students.</p>
+        <p>Done out of genuine care for students.</p>
       </div>
     </div>
   </div>
@@ -451,7 +452,7 @@
   <div class="section-header">
     <div class="divider"></div>
     <h2>Submit Your Document</h2>
-    <p>All I need is your email and a Google Doc link. That's it — simple, safe, and completely transparent.</p>
+    <p>All I need is your email and a Google Doc link.</p>
   </div>
 
   <form id="proofForm" onsubmit="handleSubmit(event)">
@@ -482,7 +483,7 @@
         <li>Under "General access", choose <strong>"Anyone with the link"</strong></li>
         <li>Set the role to <strong>Commenter</strong> (not Editor — this protects your content)</li>
         <li>Copy the link and paste it in the field below</li>
-        <li>Also add my email directly so I receive access: <button type="button" class="copy-email-btn" onclick="copyEmail(this)">ujah.john@email.com — click to copy</button></li>
+        <li>Also add my email directly so I receive access: <button type="button" class="copy-email-btn" onclick="copyEmail(this)">greatujah088@gmail.com — click to copy</button></li>
       </ol>
       <p style="font-size:0.8rem; color:#777; margin-top:0.6rem;"><em>Commenter access means I can leave feedback but cannot edit, delete, or download your document.</em></p>
     </div>
@@ -500,7 +501,7 @@
 
     <div class="form-submit">
       <button type="submit" class="btn-primary">Send for Proofreading →</button>
-      <p class="form-note">100% free. Only your email is collected. Your document stays entirely yours.</p>
+      <p class="form-note">100% free.</p>
     </div>
   </form>
 
@@ -537,7 +538,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="logo">Proof<span>Perfect</span></div>
-  <p class="credit">by Ujah John — Here to Guide, Not to Judge</p>
+  <p class="credit">by Ujah John — Here to Guide</p>
   <p>© 2025 ProofPerfect. Free. Always.</p>
 </footer>
 
@@ -549,12 +550,18 @@
     });
   }
 
-  async function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
 
-    const res = await fetch('/api/submit', {
+    const res = await fetch('/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json', // ⭐ REQUIRED
+            'X-CSRF-TOKEN': document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute('content'),
+        },
         body: JSON.stringify({
             email:           document.getElementById('emailInput').value,
             document_type:   document.querySelector('select').value,
@@ -563,38 +570,41 @@
         }),
     });
 
+    if (!res.ok) {
+        const error = await res.text();
+        console.log(error);
+        return;
+    }
+
     const data = await res.json();
+
     if (data.success) {
         document.getElementById('proofForm').style.display = 'none';
         document.getElementById('successMsg').style.display = 'block';
     }
 }
 
-  function postComment() {
-    const nameEl = document.getElementById('commentName');
-    const textEl = document.getElementById('commentText');
-    const name = nameEl.value.trim() || 'Anonymous';
-    const text = textEl.value.trim();
-    if (!text) { textEl.focus(); return; }
+ function postComment() {
+  const textEl = document.getElementById('commentText');
+  const text = textEl.value.trim();
+  if (!text) { textEl.focus(); return; }
 
-    const initial = name.charAt(0).toUpperCase();
-    const list = document.getElementById('commentList');
+  const list = document.getElementById('commentList');
 
-    const card = document.createElement('div');
-    card.className = 'comment-card';
-    card.innerHTML = `
-      <div class="comment-meta">
-        <div class="comment-avatar">${initial}</div>
-        <span class="comment-name">${esc(name)}</span>
-        <span class="comment-time">Just now</span>
-      </div>
-      <div class="comment-text">${esc(text)}</div>
-    `;
-    list.insertBefore(card, list.firstChild);
-    nameEl.value = '';
-    textEl.value = '';
-    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+  const card = document.createElement('div');
+  card.className = 'comment-card';
+  card.innerHTML = `
+    <div class="comment-meta">
+      <div class="comment-avatar">A</div>
+      <span class="comment-name">Anonymous</span>
+      <span class="comment-time">Just now</span>
+    </div>
+    <div class="comment-text">${esc(text)}</div>
+  `;
+  list.insertBefore(card, list.firstChild);
+  textEl.value = '';
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
 
   function esc(s) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
