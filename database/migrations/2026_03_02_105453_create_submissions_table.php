@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
+            $table->string('document_type');
+            $table->enum('status', ['pending', 'in_review', 'completed'])->default('pending');
+            $table->text('admin_notes')->nullable();
+            $table->timestamp('reviewed_at')->nullable();
             $table->timestamps();
         });
     }

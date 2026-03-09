@@ -531,33 +531,6 @@
       </div>
       <button type="button" class="btn-primary" onclick="postComment()" style="padding: 0.85rem 2rem; font-size: 0.88rem;">Post Comment</button>
     </div>
-
-    <div class="comment-list" id="commentList">
-      <div class="comment-card">
-        <div class="comment-meta">
-          <div class="comment-avatar">C</div>
-          <span class="comment-name">Chiamaka O.</span>
-          <span class="comment-time">2 days ago</span>
-        </div>
-        <div class="comment-text">I was nervous to share my SOP but John was incredibly respectful and helpful. The feedback was specific, kind, and practical. My writing improved so much after applying the suggestions. Genuinely grateful for this free service — it made a real difference.</div>
-      </div>
-      <div class="comment-card">
-        <div class="comment-meta">
-          <div class="comment-avatar">T</div>
-          <span class="comment-name">Tunde A.</span>
-          <span class="comment-time">5 days ago</span>
-        </div>
-        <div class="comment-text">As a student worried about my CV, I didn't know where to start. The feedback I received was practical, honest, and thorough. I got the internship. Thank you Ujah John — you genuinely helped me!</div>
-      </div>
-      <div class="comment-card">
-        <div class="comment-meta">
-          <div class="comment-avatar">S</div>
-          <span class="comment-name">Sofia R.</span>
-          <span class="comment-time">1 week ago</span>
-        </div>
-        <div class="comment-text">I was skeptical that something this good could truly be free. But it is. My cover letter felt so much stronger after the feedback — clear, confident, and professional. I'd recommend this to every student I know.</div>
-      </div>
-    </div>
   </div>
 </section>
 

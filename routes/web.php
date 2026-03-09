@@ -1,20 +1,39 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SubmissionController;
 use Illuminate\Support\Facades\Route;
 
+// PUBLIC
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::post('submit', [SubmissionController::class, 'store'])
+    ->name('submit');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::post('/api/comments', [CommentController::class, 'store']);
+Route::get('/api/comments', [CommentController::class, 'index']);
+
+// ADMIN (login required)
+Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
+
+    Route::get('/', [AdminController::class, 'dashboard'])
+        ->name('dashboard');
+
+    Route::get('/submissions', [AdminController::class, 'index'])
+        ->name('submissions.index');
+
+    Route::get('/submissions/{submission}', [AdminController::class, 'show'])
+        ->name('submissions.show');
+
+    Route::patch('/submissions/{submission}', [AdminController::class, 'update'])
+        ->name('submissions.update');
+
+    Route::delete('/submissions/{submission}', [AdminController::class, 'destroy'])
+        ->name('submissions.destroy');
+
 });
 
 require __DIR__.'/auth.php';
