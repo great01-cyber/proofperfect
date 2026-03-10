@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"></head>
-<body style="font-family: sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 2rem;">
-    <h2 style="color: #c9952a;">📄 New Proofreading Submission</h2>
-    <hr style="border: 1px solid #eee;">
+@component('mail::message')
+# New Submission Received
 
-    <p><strong>Email:</strong> {{ $submission->email }}</p>
-    <p><strong>Document Type:</strong> {{ $submission->document_type }}</p>
-    <p><strong>Google Doc:</strong> <a href="{{ $submission->google_doc_link }}">{{ $submission->google_doc_link }}</a></p>
+**Email:** {{ $submission->email }}
+**Document Type:** {{ $submission->document_type }}
+**Google Doc Link:** [Open Document]({{ $submission->google_doc_link }})
 
-    @if($submission->focus_notes)
-    <p><strong>Focus Notes:</strong><br>{{ $submission->focus_notes }}</p>
-    @endif
+@if($submission->focus_notes)
+**Focus Notes:**
+{{ $submission->focus_notes }}
+@endif
 
-    <hr style="border: 1px solid #eee;">
-    <p style="font-size: 0.85rem; color: #999;">Submitted via ProofPerfect</p>
-</body>
-</html>
+Thanks,<br>
+Your App
+@endcomponent
