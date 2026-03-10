@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NewSubmissionMail;
-use App\Mail\SubmissionConfirmationMail;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
