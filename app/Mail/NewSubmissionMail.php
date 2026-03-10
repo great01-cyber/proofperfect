@@ -30,3 +30,5 @@ class NewSubmissionMail extends Mailable
         );
     }
 }
+
+
