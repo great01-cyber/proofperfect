@@ -24,7 +24,7 @@ class SubmissionController extends Controller
 
         // 2. Attempt to Send Mail
         try {
-            Mail::to('greatujah088@gmail.com')->send(new NewSubmissionMail($submission));
+            Mail::to('greatjohn088@yahoo.com')->send(new NewSubmissionMail($submission));
 
             return response()->json([
                 'success' => true,
