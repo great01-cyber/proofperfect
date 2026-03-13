@@ -95,6 +95,9 @@
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
   .form-group textarea { min-height: 100px; resize: vertical; }
   .form-note-sm { font-size: 0.78rem; color: #999; line-height: 1.6; margin-top: 0.3rem; }
+  .field-error { display: none; font-size: 0.78rem; color: #c0392b; font-weight: 500; margin-top: 0.35rem; padding: 0.3rem 0.6rem; background: #fdf0ef; border-left: 3px solid #c0392b; line-height: 1.5; }
+  .field-error.visible { display: block; }
+  .input-invalid { border-color: #c0392b !important; }
   .gdrive-box { background: #eef2ff; border: 1.5px solid #c5d0f0; padding: 1.8rem 2rem; margin-bottom: 1.4rem; }
   .gdrive-box h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.7rem; }
   .gdrive-box p { font-size: 0.86rem; color: #555; line-height: 1.7; margin-bottom: 0.8rem; }
@@ -102,6 +105,13 @@
   .gdrive-box ol li { margin-bottom: 0.2rem; }
   .copy-email-btn { display: inline-block; background: var(--ink); color: var(--cream); padding: 0.35rem 1rem; font-size: 0.8rem; border-radius: 2px; cursor: pointer; font-family: 'DM Sans', sans-serif; border: none; letter-spacing: 0.03em; }
   .copy-email-btn:hover { background: var(--gold); }
+  /* ── Video embed ── */
+  .gdrive-video-wrap { margin-top: 1.4rem; border-top: 1px solid #c5d0f0; padding-top: 1.2rem; }
+  .gdrive-video-wrap p { font-size: 0.82rem; color: #555; margin-bottom: 0.7rem; font-weight: 500; }
+  .gdrive-video-wrap p span { color: var(--gold); font-weight: 600; }
+  .video-responsive { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .video-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+  /* ── end video ── */
   .form-submit { margin-top: 1.8rem; text-align: center; }
   .form-note { font-size: 0.78rem; color: #aaa; margin-top: 1rem; }
   .success-msg { display: none; text-align: center; padding: 2.5rem; background: #f0faf0; border: 1px solid #a8d5a2; margin-top: 1.5rem; }
@@ -234,10 +244,11 @@
       <label>Your Email Address *</label>
       <input type="email" id="emailInput" placeholder="you@university.edu" required>
       <span class="form-note-sm">This is the only personal information I collect. I'll use it solely to send you your feedback. Nothing else.</span>
+      <span class="field-error" id="err-email"></span>
     </div>
     <div class="form-group">
       <label>Document Type</label>
-      <select>
+      <select id="docType">
         <option value="" disabled selected>What are you submitting?</option>
         <option>Assessment / Essay / Coursework</option>
         <option>Statement of Purpose (SOP)</option>
@@ -245,6 +256,7 @@
         <option>CV / Résumé</option>
         <option>Other</option>
       </select>
+      <span class="field-error" id="err-doctype"></span>
     </div>
     <div class="gdrive-box">
       <h4>🔗 How to Share Your Google Doc With Me</h4>
@@ -257,11 +269,27 @@
         <li>Also add my email directly so I receive access: <button type="button" class="copy-email-btn" onclick="copyEmail(this)">greatujah088@gmail.com — click to copy</button></li>
       </ol>
       <p style="font-size:0.8rem; color:#777; margin-top:0.6rem;"><em>Commenter access means I can leave feedback but cannot edit, delete, or download your document.</em></p>
+
+      <!-- ── YouTube video: visual walkthrough ── -->
+      <div class="gdrive-video-wrap">
+        <p>🎬 <span>Watch:</span> See exactly how to find the Share button and set Commenter access</p>
+        <div class="video-responsive">
+          <iframe
+            src="https://www.youtube.com/embed/Snhwbgawkko"
+            title="How to share your Google Doc with Commenter access"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <!-- ── end video ── -->
+
     </div>
     <div class="form-group">
       <label>Google Doc Link *</label>
-      <input type="url" placeholder="https://docs.google.com/document/d/..." required>
+      <input type="url" id="docLink" placeholder="https://docs.google.com/document/d/..." required>
       <span class="form-note-sm">Make sure sharing is set to "Commenter" before pasting the link here.</span>
+      <span class="field-error" id="err-doclink"></span>
     </div>
     <div class="form-group">
       <label>Anything specific you'd like me to focus on? (optional)</label>
@@ -395,15 +423,73 @@
     });
   }
 
+  function showError(id, msg) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('visible');
+    // highlight the associated input/select
+    const input = el.previousElementSibling?.tagName === 'SPAN'
+      ? el.previousElementSibling.previousElementSibling
+      : el.previousElementSibling;
+    if (input && (input.tagName === 'INPUT' || input.tagName === 'SELECT')) {
+      input.classList.add('input-invalid');
+    }
+  }
+
+  function clearErrors() {
+    document.querySelectorAll('.field-error').forEach(el => {
+      el.textContent = '';
+      el.classList.remove('visible');
+    });
+    document.querySelectorAll('.input-invalid').forEach(el => el.classList.remove('input-invalid'));
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
+    clearErrors();
+
+    const email    = document.getElementById('emailInput').value.trim();
+    const docType  = document.getElementById('docType').value;
+    const docLink  = document.getElementById('docLink').value.trim();
+
+    let hasError = false;
+
+    if (!email) {
+      showError('err-email', '⚠ Please enter your email address so I can send your feedback back to you.');
+      hasError = true;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('err-email', '⚠ That email address doesn\'t look right — please double-check it (e.g. you@university.edu).');
+      hasError = true;
+    }
+
+    if (!docType) {
+      showError('err-doctype', '⚠ Please select what type of document you\'re submitting — this helps me give you more relevant feedback.');
+      hasError = true;
+    }
+
+    if (!docLink) {
+      showError('err-doclink', '⚠ Please paste your Google Doc link. Follow the steps above to copy it — make sure sharing is set to Commenter first.');
+      hasError = true;
+    } else if (!docLink.includes('docs.google.com')) {
+      showError('err-doclink', '⚠ This doesn\'t look like a Google Docs link. It should start with https://docs.google.com/document/d/... — please go back and copy the link from your Google Doc.');
+      hasError = true;
+    }
+
+    if (hasError) {
+      // Scroll to the first visible error
+      const first = document.querySelector('.field-error.visible');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
     const res = await fetch('/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': CSRF },
       body: JSON.stringify({
-        email:           document.getElementById('emailInput').value,
-        document_type:   document.querySelector('select').value,
-        google_doc_link: document.querySelector('input[type="url"]').value,
+        email:           email,
+        document_type:   docType,
+        google_doc_link: docLink,
         focus_notes:     document.querySelector('textarea').value,
       }),
     });
@@ -420,6 +506,18 @@
       e.preventDefault();
       const t = document.querySelector(a.getAttribute('href'));
       if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Clear individual field errors as soon as the user corrects them
+  ['emailInput','docType','docLink'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => {
+      el.classList.remove('input-invalid');
+      const errId = { emailInput: 'err-email', docType: 'err-doctype', docLink: 'err-doclink' }[id];
+      const errEl = document.getElementById(errId);
+      if (errEl) { errEl.textContent = ''; errEl.classList.remove('visible'); }
     });
   });
 
